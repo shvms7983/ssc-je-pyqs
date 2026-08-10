@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SSC JE Mechanical CBT Portal | Pass Pro Engine</title>
+  <title>SSC JE Mechanical CBT Portal | Pro Exam Engine</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -12,7 +12,7 @@
       --bg-main: #f1f5f9;
       --surface: #ffffff;
       --dark-navy: #0f172a;
-      --header-bg: #1e293b;
+      --header-bg: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       --border: #cbd5e1;
       --border-light: #e2e8f0;
       --text-dark: #0f172a;
@@ -25,39 +25,102 @@
       --cbt-red-bg: #fef2f2;
       --cbt-purple: #7c3aed;
       --cbt-purple-bg: #f5f3ff;
-      --cbt-yellow: #d97706;
       
       --accent: #2563eb;
       --accent-hover: #1d4ed8;
       --radius: 6px;
-      --shadow: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
 
     * { box-sizing: border-box; font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
     body { background-color: var(--bg-main); color: var(--text-dark); min-height: 100vh; display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; }
 
-    /* Top NTA Header */
+    /* Ultra-Pro NTA Header */
     header {
       background: var(--header-bg);
       color: #ffffff;
-      padding: 10px 24px;
+      padding: 12px 28px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      border-bottom: 2px solid var(--accent);
+      position: relative;
+      z-index: 100;
     }
-    .brand { display: flex; align-items: center; gap: 12px; }
-    .brand-badge { background: #38bdf8; color: #0369a1; padding: 4px 8px; border-radius: 4px; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.5px; }
-    .brand-title { font-size: 1.05rem; font-weight: 700; color: #f8fafc; letter-spacing: 0.2px; }
-    
-    .header-right { display: flex; align-items: center; gap: 16px; }
-    .mode-switch { display: flex; background: rgba(255,255,255,0.08); padding: 3px; border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.12); }
-    .mode-btn { padding: 5px 12px; border: none; background: transparent; border-radius: 4px; cursor: pointer; font-weight: 600; font-size: 0.8rem; color: #94a3b8; transition: 0.2s; }
-    .mode-btn.active { background: #ffffff; color: var(--dark-navy); box-shadow: var(--shadow); }
 
-    .timer-box { background: #7c2d12; color: #ffedd5; padding: 6px 14px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 0.95rem; border: 1px solid #9a3412; display: none; }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .brand-badge {
+      background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+      color: #ffffff;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 0.82rem;
+      letter-spacing: 0.8px;
+      box-shadow: 0 0 12px rgba(37, 99, 235, 0.4);
+    }
 
-    /* Layout Structure */
+    .brand-info { display: flex; flex-direction: column; }
+    .brand-title { font-size: 1.15rem; font-weight: 700; color: #f8fafc; letter-spacing: 0.3px; }
+    .brand-sub { font-size: 0.72rem; color: #94a3b8; display: flex; align-items: center; gap: 6px; margin-top: 2px; }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      background-color: #22c55e;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #22c55e;
+      display: inline-block;
+    }
+
+    .header-right { display: flex; align-items: center; gap: 18px; }
+
+    .mode-switch {
+      display: flex;
+      background: rgba(15, 23, 42, 0.6);
+      padding: 4px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+    }
+
+    .mode-btn {
+      padding: 6px 14px;
+      border: none;
+      background: transparent;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.82rem;
+      color: #94a3b8;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mode-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 2px 10px rgba(37, 99, 235, 0.35);
+    }
+
+    .timer-box {
+      background: rgba(124, 45, 18, 0.85);
+      color: #ffedd5;
+      padding: 7px 16px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: 1px solid #ea580c;
+      box-shadow: 0 0 10px rgba(234, 88, 12, 0.3);
+      display: none;
+      letter-spacing: 0.5px;
+    }
+
+    /* App Layout */
     .app-layout {
       max-width: 1400px;
       margin: 16px auto;
@@ -68,10 +131,8 @@
       flex: 1;
     }
 
-    /* Left Engine Area */
     .main-area { display: flex; flex-direction: column; gap: 12px; }
 
-    /* Subject & Filter Bar */
     .filter-bar {
       background: var(--surface);
       padding: 10px 16px;
@@ -116,9 +177,26 @@
     .btn-bm { background: transparent; border: 1px solid var(--border); padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); }
     .btn-bm.active { background: #fef3c7; border-color: #f59e0b; color: #b45309; }
 
-    .q-text { font-size: 1.1rem; font-weight: 600; color: var(--text-dark); line-height: 1.6; margin-bottom: 22px; }
+    .q-text { font-size: 1.1rem; font-weight: 600; color: var(--text-dark); line-height: 1.6; margin-bottom: 16px; }
 
-    /* Options Styling */
+    /* Diagram Frame Styling */
+    .img-box {
+      margin: 12px 0 20px 0;
+      max-width: 100%;
+      border-radius: 6px;
+      border: 1px solid var(--border-light);
+      padding: 8px;
+      background: #fafafa;
+      display: none;
+    }
+    .img-box img {
+      max-width: 100%;
+      max-height: 360px;
+      display: block;
+      margin: 0 auto;
+      border-radius: 4px;
+    }
+
     .options-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
     .opt-btn {
       display: flex;
@@ -152,14 +230,12 @@
     .opt-btn:hover:not(:disabled) { background: #f8fafc; border-color: #94a3b8; }
     .opt-btn.selected-exam { border-color: var(--accent); background: #eff6ff; font-weight: 600; }
     
-    /* Correct & Wrong States */
     .opt-btn.correct { background: var(--cbt-green-bg) !important; border-color: var(--cbt-green) !important; color: #14532d !important; font-weight: 600; }
     .opt-btn.correct .opt-prefix { background: var(--cbt-green); color: white; border-color: var(--cbt-green); }
     
     .opt-btn.wrong { background: var(--cbt-red-bg) !important; border-color: var(--cbt-red) !important; color: #7f1d1d !important; font-weight: 600; }
     .opt-btn.wrong .opt-prefix { background: var(--cbt-red); color: white; border-color: var(--cbt-red); }
 
-    /* Solution Box */
     .solution-drawer {
       display: none;
       background: #f0f9ff;
@@ -172,9 +248,8 @@
       line-height: 1.55;
       color: #0c4a6e;
     }
-    .sol-title { font-weight: 700; margin-bottom: 4px; color: #0284c7; display: flex; align-items: center; gap: 6px; }
+    .sol-title { font-weight: 700; margin-bottom: 6px; color: #0284c7; display: flex; align-items: center; gap: 6px; }
 
-    /* CBT Bottom Action Bar */
     .cbt-footer {
       padding: 12px 20px;
       background: #f8fafc;
@@ -235,7 +310,6 @@
     .p-node:hover { border-color: var(--accent); }
     .p-node.curr { border: 2px solid var(--dark-navy) !important; font-weight: 800; }
     
-    /* Palette Status States */
     .p-node.answered { background: var(--cbt-green); color: white; border-color: var(--cbt-green); }
     .p-node.wrong-ans { background: var(--cbt-red); color: white; border-color: var(--cbt-red); }
     .p-node.marked { background: var(--cbt-purple); color: white; border-color: var(--cbt-purple); }
@@ -247,25 +321,32 @@
 </head>
 <body>
 
-  <!-- Top NTA Header -->
+  <!-- Modern NTA Header -->
   <header>
     <div class="brand">
-      <span class="brand-badge">SSC JE</span>
-      <span class="brand-title">Mechanical Engineering PYQ Portal</span>
+      <span class="brand-badge">SSC JE ME</span>
+      <div class="brand-info">
+        <span class="brand-title">Mechanical Engineering CBT Portal</span>
+        <span class="brand-sub"><span class="status-dot"></span> LIVE TEST SERVER 01 • CBT EXAM ENGINE</span>
+      </div>
     </div>
+    
     <div class="header-right">
       <div class="mode-switch">
-        <button class="mode-btn active" id="btn-practice" onclick="setEngineMode('practice')">Practice Mode</button>
-        <button class="mode-btn" id="btn-exam" onclick="setEngineMode('exam')">Mock CBT Mode ⏱️</button>
+        <button class="mode-btn active" id="btn-practice" onclick="setEngineMode('practice')">
+          <span>📖</span> Practice Mode
+        </button>
+        <button class="mode-btn" id="btn-exam" onclick="setEngineMode('exam')">
+          <span>⏱️</span> Mock CBT Exam
+        </button>
       </div>
       <div class="timer-box" id="timer-display">⏱️ 120:00</div>
     </div>
   </header>
 
-  <!-- App Main Structure -->
+  <!-- App Structure -->
   <div class="app-layout">
     
-    <!-- Left Engine Column -->
     <div class="main-area">
       
       <div class="filter-bar">
@@ -298,12 +379,20 @@
           </div>
           <div class="q-text" id="question">Questions loading...</div>
 
+          <!-- Question Diagram Container -->
+          <div class="img-box" id="q-img-box">
+            <img id="q-img" src="" alt="Question Diagram">
+          </div>
+
           <div class="options-grid" id="options-container"></div>
 
-          <!-- Explanation Box -->
+          <!-- Solution & Explanation Diagram Container -->
           <div class="solution-drawer" id="solution-box">
             <div class="sol-title">💡 Detailed Technical Solution</div>
             <div id="explanation-text">Explanation...</div>
+            <div class="img-box" id="exp-img-box" style="margin-top: 12px; margin-bottom: 0;">
+              <img id="exp-img" src="" alt="Explanation Diagram">
+            </div>
           </div>
         </div>
 
@@ -322,7 +411,7 @@
 
     </div>
 
-    <!-- Right Side Question Palette Bar -->
+    <!-- Right Palette -->
     <div class="palette-area">
       <div class="palette-head">Question Navigation Palette</div>
       
@@ -344,7 +433,7 @@
   let currentIdx = 0;
   let engineMode = 'practice';
   let userAnswers = {}; 
-  let answerStatus = {}; // 'correct', 'wrong', 'marked'
+  let answerStatus = {}; 
   let bookmarks = JSON.parse(localStorage.getItem('ssc_me_bookmarks') || '[]');
   let timerInterval;
   let timeRemaining = 120 * 60;
@@ -354,13 +443,12 @@
       const response = await fetch('questions.json');
       rawQuestions = await response.json();
       
-      // Auto Year-Wise Sorting (Purane pehle)
       rawQuestions.sort((a, b) => (a.year || 0) - (b.year || 0));
 
       updateBookmarkCount();
       applyFilters();
     } catch (err) {
-      document.getElementById("question").innerText = "Error: questions.json file nahi mili ya JSON error hai!";
+      document.getElementById("question").innerText = "Error: questions.json file nahi mili ya JSON formatting incorrect hai!";
     }
   }
 
@@ -433,6 +521,16 @@
     document.getElementById("subject-tag").innerText = "Subject: " + (q.subject || "Mechanical Core");
     document.getElementById("year-tag").innerText = "PYQ Year: " + (q.year || "N/A");
 
+    // Question Image Loader
+    const qImgBox = document.getElementById("q-img-box");
+    const qImg = document.getElementById("q-img");
+    if (q.image) {
+      qImg.src = q.image;
+      qImgBox.style.display = "block";
+    } else {
+      qImgBox.style.display = "none";
+    }
+
     const optsContainer = document.getElementById("options-container");
     const solBox = document.getElementById("solution-box");
     const prevBtn = document.getElementById("prev-btn");
@@ -469,8 +567,19 @@
       optsContainer.appendChild(btn);
     });
 
+    // Explanation Loader
     if(userAnswers[currentIdx] !== undefined && engineMode === 'practice') {
       document.getElementById("explanation-text").innerText = q.explanation ? q.explanation : "Detailed explanation for this question will be uploaded shortly.";
+      
+      const expImgBox = document.getElementById("exp-img-box");
+      const expImg = document.getElementById("exp-img");
+      if (q.explanation_image) {
+        expImg.src = q.explanation_image;
+        expImgBox.style.display = "block";
+      } else {
+        expImgBox.style.display = "none";
+      }
+
       solBox.style.display = "block";
     }
 
