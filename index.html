@@ -394,6 +394,11 @@
       const response = await fetch('questions.json');
       rawQuestions = await response.json();
       
+      // Assign a unique ID to every question if not present
+      rawQuestions.forEach((q, idx) => {
+        if(!q.id) q.id = 'q_' + idx + '_' + (q.subject ? q.subject.replace(/\s+/g, '') : 'gen');
+      });
+
       rawQuestions.sort((a, b) => (a.year || 0) - (b.year || 0));
 
       updateBookmarkCount();
@@ -421,13 +426,14 @@
     pGrid.innerHTML = "";
 
     filteredQuestions.forEach((q, idx) => {
+      const qId = q.id;
       const btn = document.createElement('div');
       btn.className = `p-node ${idx === currentIdx ? 'curr' : ''}`;
       btn.innerText = idx + 1;
 
-      if(answerStatus[idx] === 'correct') btn.classList.add('answered');
-      else if(answerStatus[idx] === 'wrong') btn.classList.add('wrong-ans');
-      else if(answerStatus[idx] === 'marked') btn.classList.add('marked');
+      if(answerStatus[qId] === 'correct') btn.classList.add('answered');
+      else if(answerStatus[qId] === 'wrong') btn.classList.add('wrong-ans');
+      else if(answerStatus[qId] === 'marked') btn.classList.add('marked');
 
       btn.onclick = () => {
         currentIdx = idx;
@@ -440,6 +446,7 @@
   function showQuestion() {
     if(filteredQuestions.length === 0) return;
     const q = filteredQuestions[currentIdx];
+    const qId = q.id;
 
     document.getElementById("progress-text").innerText = `QUESTION ${currentIdx + 1} OF ${filteredQuestions.length}`;
     document.getElementById("question").innerText = q.question;
@@ -476,19 +483,19 @@
       btn.className = "opt-btn";
       btn.innerHTML = `<span class="opt-prefix">${prefixes[idx]}</span> <span>${opt}</span>`;
       
-      if(userAnswers[currentIdx] !== undefined) {
+      if(userAnswers[qId] !== undefined) {
         btn.disabled = true;
         if(idx === q.answer) btn.classList.add('correct');
-        if(idx === userAnswers[currentIdx] && idx !== q.answer) btn.classList.add('wrong');
+        if(idx === userAnswers[qId] && idx !== q.answer) btn.classList.add('wrong');
       } else {
-        btn.onclick = () => selectOptionPractice(idx, q.answer);
+        btn.onclick = () => selectOptionPractice(qId, idx, q.answer);
       }
 
       optsContainer.appendChild(btn);
     });
 
     // Explanation Loader
-    if(userAnswers[currentIdx] !== undefined) {
+    if(userAnswers[qId] !== undefined) {
       document.getElementById("explanation-text").innerText = q.explanation ? q.explanation : "Detailed explanation for this question will be uploaded shortly.";
       
       const expImgBox = document.getElementById("exp-img-box");
@@ -509,20 +516,24 @@
     renderPalette();
   }
 
-  function selectOptionPractice(selected, correct) {
-    userAnswers[currentIdx] = selected;
-    answerStatus[currentIdx] = (selected === correct) ? 'correct' : 'wrong';
+  function selectOptionPractice(qId, selected, correct) {
+    userAnswers[qId] = selected;
+    answerStatus[qId] = (selected === correct) ? 'correct' : 'wrong';
     showQuestion();
   }
 
   function clearResponse() {
-    delete userAnswers[currentIdx];
-    delete answerStatus[currentIdx];
+    if(filteredQuestions.length === 0) return;
+    const qId = filteredQuestions[currentIdx].id;
+    delete userAnswers[qId];
+    delete answerStatus[qId];
     showQuestion();
   }
 
   function markForReview() {
-    answerStatus[currentIdx] = 'marked';
+    if(filteredQuestions.length === 0) return;
+    const qId = filteredQuestions[currentIdx].id;
+    answerStatus[qId] = 'marked';
     nextQuestion();
   }
 
